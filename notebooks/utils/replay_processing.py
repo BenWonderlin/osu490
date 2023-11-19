@@ -44,7 +44,7 @@ def _get_hitobject_embedding(prev_obj, curr_obj, next_obj, mod_str):
     out_distance = 0.0
     out_timedelta = 5000.0
 
-    angle = np.pi
+    cos_angle = -1
 
     is_slider = 0.0
     slider_duration = 0.0
@@ -66,7 +66,7 @@ def _get_hitobject_embedding(prev_obj, curr_obj, next_obj, mod_str):
         out_timedelta = (next_obj.time - curr_obj.time).microseconds / 1000
 
     if prev_obj and next_obj:
-        angle = _compute_angle_cosine(prev_obj, curr_obj, next_obj)
+        cos_angle = _compute_angle_cosine(prev_obj, curr_obj, next_obj)
 
     if type(curr_obj) == Slider:
         is_slider = 1.0
@@ -75,7 +75,7 @@ def _get_hitobject_embedding(prev_obj, curr_obj, next_obj, mod_str):
         slider_num_ticks = curr_obj.ticks
         slider_num_beats = curr_obj.num_beats
         
-    if "DT" in mod_str:
+    if "DT" in mod_str or "NC" in mod_str:
         in_timedelta *= 2.0/3
         out_timedelta *= 2.0/3
         slider_duration *= 2.0/3
@@ -89,7 +89,7 @@ def _get_hitobject_embedding(prev_obj, curr_obj, next_obj, mod_str):
         x_position, y_position,
         in_x_offset, in_y_offset, in_distance, in_timedelta,
         out_x_offset, out_y_offset, out_distance, out_timedelta,
-        angle,
+        cos_angle,
         is_slider, slider_duration, slider_length, slider_num_ticks, slider_num_beats
     ])
 
@@ -194,7 +194,7 @@ def _compute_cs(cs, mod_str):
     adj_cs = cs
     
     if "HR" in mod_str:
-        adj_cs = min(1.3 * cs, 10)
+        adj_cs = min(1.3 * adj_cs, 10)
         
     elif "EZ" in mod_str:
         adj_cs /= 2
@@ -211,7 +211,7 @@ def _compute_hp(hp, mod_str):
     adj_hp = hp
     
     if "HR" in mod_str:
-        adj_hp = min(1.4 * hp, 10)
+        adj_hp = min(1.4 * adj_hp, 10)
         
     elif "EZ" in mod_str:
         adj_hp /= 2
@@ -229,7 +229,7 @@ def _compute_od(od, mod_str):
     elif "EZ" in mod_str:
         adj_od /= 2
     
-    return od
+    return adj_od
     
 
 def _convert_od_to_hitwindows(od, mod_str):
@@ -272,7 +272,7 @@ def get_beatmap_context(replay, beatmap_library):
         hitwindow_50,
         
         1.0 if "HD" in mod_str else 0.0,                        # visual mod, so need boolean
-        1.0 if "DT" in mod_str  or "NC" in mod_str else 0.0,    # apparently DT changes the animation (? idk)
+        1.0 if "DT" in mod_str or "NC" in mod_str else 0.0,    # apparently DT changes the animation (? idk)
         
         # mods not included: FL, SO, NF, PF, SO, V2, AT, RL, 
     

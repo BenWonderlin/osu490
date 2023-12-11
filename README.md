@@ -12,3 +12,12 @@ A ML performance point algorithm. Completed as part of CPSC 490: Senior Project.
 
 #### [Final Report](https://docs.google.com/document/d/1dxcpPlXla5SVATwR15Pf8kRxHcr1xYhVloNXdglCNVQ/edit?usp=sharing)
 
+To reproduce difficulty estimations, use evaluate_difficulty as follows:
+
+```
+python evaluate_difficulty.py --replay_dir REPLAY_DIR --beatmap_dir BEATMAP_DIR [--model MODEL]
+```
+
+where REPLAY_DIR is a path to folder of .osr files, BEATMAP_DIR is a path to a folder of the corresponding .osu files, and MODEL is a string indicating the model type. Note that beatmap files must be named by their md5 hashes (like those in the [o!rdr replay dataset](https://www.kaggle.com/datasets/skihikingkevin/ordr-replay-dump)). MODEL can be "naive", "seq", or "seq2seq". Use the help flag for more information.
+
+For the sake of consistency, it is strongly recommended to use the conda environments specified in [requirements_cpu.txt](other_file.md) and [requirements_gpu.txt](other_file.md).

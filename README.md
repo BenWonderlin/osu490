@@ -16,10 +16,10 @@ A ML performance point algorithm. Completed as part of CPSC 490: Senior Project.
 
 <br>
 
-To calculate difficulty estimates, use `evaluate_difficulty.py` as follows:
+To calculate difficulty estimates, use `estimate_difficulty.py` as follows:
 
 ```
-python evaluate_difficulty.py --replay_dir REPLAY_DIR --beatmap_dir BEATMAP_DIR [--model MODEL]
+python estimate_difficulty.py --replay_dir REPLAY_DIR --beatmap_dir BEATMAP_DIR [--model MODEL]
 ```
 
 where the replay directory contains `.osr` files being evaluated, the beatmap directory contains the corresponding `.osu` files, and the model is a string indicating the model type. Note that the beatmap files must be named by their md5 hashes like those in the [o!rdr replay dataset](https://www.kaggle.com/datasets/skihikingkevin/ordr-replay-dump). The model type must be `"naive"`, `"seq"`, or `"seq2seq"`. Use the `help` flag for more information.

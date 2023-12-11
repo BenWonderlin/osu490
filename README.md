@@ -14,7 +14,9 @@ A ML performance point algorithm. Completed as part of CPSC 490: Senior Project.
 
 
 
-To reproduce difficulty estimations, use evaluate_difficulty as follows:
+<br>
+
+To calculate difficulty estimates, use evaluate_difficulty as follows:
 
 ```
 python evaluate_difficulty.py --replay_dir REPLAY_DIR --beatmap_dir BEATMAP_DIR [--model MODEL]

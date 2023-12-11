@@ -24,4 +24,10 @@ python evaluate_difficulty.py --replay_dir REPLAY_DIR --beatmap_dir BEATMAP_DIR 
 
 where the replay directory contains `.osr` files being evaluated, the beatmap directory contains the corresponding `.osu` files, and the model is a string indicating the model type. Note that the beatmap files must be named by their md5 hashes like those in the [o!rdr replay dataset](https://www.kaggle.com/datasets/skihikingkevin/ordr-replay-dump). The model type must be `"naive"`, `"seq"`, or `"seq2seq"`. Use the `help` flag for more information.
 
-For the sake of consistency, it is strongly recommended to use the conda environments specified in [requirements_cpu.txt](requirements_cpu.txt) and [requirements_gpu.txt](requirements_gpu.txt).
+For the sake of consistency, it is strongly recommended to use the conda environment specified in [requirements_gpu.txt](requirements_gpu.txt). At least the following packages are essential:
+
+- numpy
+- pandas
+- tensorflow
+- circleguard
+- slider 
